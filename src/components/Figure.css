@@ -1,0 +1,17 @@
+.figure {
+  margin: 0;
+}
+
+.figure__img {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.figure__caption {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
