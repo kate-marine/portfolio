@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" font-family="Inter, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <title>Census tract median income against distance to nearest grocery store</title>
+  <rect width="720" height="420" fill="#ffffff"/>
+
+  <!-- highlighted region: low income and low access -->
+  <rect x="364" y="267" width="296" height="93" fill="#2c4a6e" fill-opacity="0.06"/>
+
+  <!-- frame + gridlines -->
+  <g stroke="#e6e5e1" stroke-width="1">
+    <line x1="90" y1="60"  x2="660" y2="60"/>
+    <line x1="90" y1="135" x2="660" y2="135"/>
+    <line x1="90" y1="210" x2="660" y2="210"/>
+    <line x1="90" y1="285" x2="660" y2="285"/>
+    <line x1="90" y1="360" x2="660" y2="360"/>
+  </g>
+  <line x1="90" y1="60" x2="90" y2="360" stroke="#d3d2cd" stroke-width="1"/>
+
+  <!-- other tracts -->
+  <g fill="#c3c2bd">
+    <circle cx="113" cy="153" r="4"/>
+    <circle cx="136" cy="207" r="4"/>
+    <circle cx="136" cy="110" r="4"/>
+    <circle cx="158" cy="247" r="4"/>
+    <circle cx="158" cy="187" r="4"/>
+    <circle cx="181" cy="133" r="4"/>
+    <circle cx="181" cy="223" r="4"/>
+    <circle cx="204" cy="270" r="4"/>
+    <circle cx="204" cy="167" r="4"/>
+    <circle cx="227" cy="197" r="4"/>
+    <circle cx="250" cy="233" r="4"/>
+    <circle cx="250" cy="90" r="4"/>
+    <circle cx="272" cy="213" r="4"/>
+    <circle cx="295" cy="253" r="4"/>
+    <circle cx="295" cy="147" r="4"/>
+    <circle cx="318" cy="190" r="4"/>
+    <circle cx="341" cy="277" r="4"/>
+    <circle cx="364" cy="227" r="4"/>
+    <circle cx="409" cy="243" r="4"/>
+    <circle cx="455" cy="263" r="4"/>
+  </g>
+
+  <!-- low-income, low-access tracts -->
+  <g fill="#2c4a6e">
+    <circle cx="386" cy="290" r="4.5"/>
+    <circle cx="432" cy="300" r="4.5"/>
+    <circle cx="478" cy="310" r="4.5"/>
+    <circle cx="500" cy="280" r="4.5"/>
+    <circle cx="546" cy="317" r="4.5"/>
+    <circle cx="592" cy="293" r="4.5"/>
+    <circle cx="614" cy="330" r="4.5"/>
+    <circle cx="637" cy="273" r="4.5"/>
+  </g>
+
+  <!-- y labels -->
+  <g fill="#6a6a67" font-size="12" text-anchor="end">
+    <text x="78" y="64">$110k</text>
+    <text x="78" y="214">$65k</text>
+    <text x="78" y="364">$20k</text>
+  </g>
+
+  <!-- x labels -->
+  <g fill="#6a6a67" font-size="12" text-anchor="middle">
+    <text x="90" y="382">0 mi</text>
+    <text x="318" y="382">10 mi</text>
+    <text x="546" y="382">20 mi</text>
+  </g>
+
+  <text x="375" y="406" fill="#6a6a67" font-size="12" text-anchor="middle">Road distance to nearest full-service grocery store</text>
+  <text x="26" y="210" fill="#6a6a67" font-size="12" text-anchor="middle" transform="rotate(-90 26 210)">Tract median household income</text>
+</svg>

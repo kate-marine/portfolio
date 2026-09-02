@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" font-family="Inter, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <title>Calibration curve</title>
+  <rect width="720" height="420" fill="#ffffff"/>
+
+  <!-- plot frame -->
+  <g stroke="#e6e5e1" stroke-width="1">
+    <line x1="90" y1="60" x2="90" y2="360"/>
+    <line x1="90" y1="360" x2="660" y2="360"/>
+    <line x1="90" y1="60" x2="660" y2="60"/>
+    <line x1="660" y1="60" x2="660" y2="360"/>
+    <line x1="90" y1="210" x2="660" y2="210"/>
+    <line x1="375" y1="60" x2="375" y2="360"/>
+  </g>
+
+  <!-- ideal diagonal -->
+  <line x1="90" y1="360" x2="660" y2="60" stroke="#b7b6b1" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- calibration line (close to diagonal, gentle S) -->
+  <polyline
+    points="120,338 190,300 260,258 330,224 400,188 470,150 540,116 620,78"
+    fill="none" stroke="#2c4a6e" stroke-width="2"/>
+  <g fill="#2c4a6e">
+    <circle cx="120" cy="338" r="3.5"/>
+    <circle cx="190" cy="300" r="3.5"/>
+    <circle cx="260" cy="258" r="3.5"/>
+    <circle cx="330" cy="224" r="3.5"/>
+    <circle cx="400" cy="188" r="3.5"/>
+    <circle cx="470" cy="150" r="3.5"/>
+    <circle cx="540" cy="116" r="3.5"/>
+    <circle cx="620" cy="78" r="3.5"/>
+  </g>
+
+  <!-- axis labels -->
+  <g fill="#6a6a67" font-size="12" text-anchor="middle">
+    <text x="90" y="380">0.0</text>
+    <text x="375" y="380">0.5</text>
+    <text x="660" y="380">1.0</text>
+  </g>
+  <g fill="#6a6a67" font-size="12" text-anchor="end">
+    <text x="78" y="364">0.0</text>
+    <text x="78" y="214">0.5</text>
+    <text x="78" y="64">1.0</text>
+  </g>
+  <text x="375" y="406" fill="#6a6a67" font-size="12" text-anchor="middle">Predicted probability of voting</text>
+  <text x="28" y="210" fill="#6a6a67" font-size="12" text-anchor="middle" transform="rotate(-90 28 210)">Observed turnout rate</text>
+
+  <text x="628" y="52" fill="#b7b6b1" font-size="11" text-anchor="end">perfect calibration</text>
+</svg>

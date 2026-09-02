@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" font-family="Inter, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <title>Permutation feature importance</title>
+  <rect width="720" height="380" fill="#ffffff"/>
+
+  <!-- axis -->
+  <line x1="230" y1="40" x2="230" y2="330" stroke="#d3d2cd" stroke-width="1"/>
+
+  <!-- gridlines -->
+  <g stroke="#e6e5e1" stroke-width="1">
+    <line x1="230" y1="40" x2="690" y2="40"/>
+    <line x1="345" y1="40" x2="345" y2="330"/>
+    <line x1="460" y1="40" x2="460" y2="330"/>
+    <line x1="575" y1="40" x2="575" y2="330"/>
+    <line x1="690" y1="40" x2="690" y2="330"/>
+  </g>
+
+  <!-- bars: value scaled so 0.45 -> 460px -->
+  <g fill="#2c4a6e">
+    <rect x="230" y="52"  width="429" height="22"/>
+    <rect x="230" y="97"  width="143" height="22"/>
+    <rect x="230" y="142" width="92"  height="22"/>
+    <rect x="230" y="187" width="72"  height="22"/>
+    <rect x="230" y="232" width="51"  height="22"/>
+    <rect x="230" y="277" width="31"  height="22"/>
+  </g>
+
+  <!-- feature labels -->
+  <g fill="#4a4a47" font-size="13" text-anchor="end">
+    <text x="214" y="68">Prior municipal vote</text>
+    <text x="214" y="113">Prior general vote</text>
+    <text x="214" y="158">Years registered</text>
+    <text x="214" y="203">Precinct % renters</text>
+    <text x="214" y="248">Age</text>
+    <text x="214" y="293">Precinct median income</text>
+  </g>
+
+  <!-- x tick labels -->
+  <g fill="#6a6a67" font-size="12" text-anchor="middle">
+    <text x="230" y="350">0.0</text>
+    <text x="345" y="350">0.1</text>
+    <text x="460" y="350">0.2</text>
+    <text x="575" y="350">0.3</text>
+    <text x="690" y="350">0.4</text>
+  </g>
+  <text x="460" y="372" fill="#6a6a67" font-size="12" text-anchor="middle">Mean decrease in ROC AUC when feature is permuted</text>
+</svg>
