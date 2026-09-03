@@ -13,7 +13,7 @@ export const site = {
 
   // 1–2 sentences. Say what you do and what kind of work you want.
   intro:
-    'I am a junior studying Quantitative Social Science. I build statistical and machine-learning models to answer applied questions in politics, education, and consumer behavior, and I care about turning analysis into clear recommendations.',
+    'I am a junior studying Quantitative Social Science. I build statistical and machine-learning models to answer applied questions in sports, economics, and human behavior.',
 
   location: 'Hanover, New Hampshire',
   email: 'katherine.a.marine.28@dartmouth.edu',
@@ -75,10 +75,10 @@ export const skills = [
 export const education = {
   school: 'Dartmouth College',
   degree: 'B.A. in Quantitative Social Science, minor in Economics',
-  period: 'Expected 2027',
+  period: 'Expected 2028',
   details: [
-    'Relevant coursework: Causal Inference, Applied Regression, Machine Learning for Social Science, Data Visualization, Probability.',
-    'GPA: 3.9 / 4.0 (placeholder).',
+    'Relevant coursework: Computational Models of Behavior, Mathematical Linear Models, Data Visualization, Machine Learning and Models of Language, Modern Statistical Computing.',
+    'GPA: 3.9 / 4.0',
   ],
 }
 
