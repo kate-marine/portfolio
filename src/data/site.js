@@ -13,7 +13,7 @@ export const site = {
 
   // 1–2 sentences. Say what you do and what kind of work you want.
   intro:
-    'I am a junior studying Quantitative Social Science. I enjoy building statistical and machine-learning models to answer applied questions in sports, economics, and human behavior.',
+    'I am a current junior studying Quantitative Social Science, and I enjoy building statistical and machine-learning models to answer applied questions in sports, economics, and human behavior.',
 
   location: 'Hanover, New Hampshire',
   email: 'katherine.a.marine.28@dartmouth.edu',
