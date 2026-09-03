@@ -1,4 +1,4 @@
-import { site, experience, education } from '../data/site.js'
+import { site, experience, activities, education } from '../data/site.js'
 import './Resume.css'
 
 export default function Resume() {
@@ -11,8 +11,7 @@ export default function Resume() {
         </a>
       </div>
       <p className="text-muted resume__note">
-        A summary is below. The PDF is the most current version — add yours at{' '}
-        <code>public/resume.pdf</code>.
+        A summary is below. The PDF is the most complete and current version.
       </p>
 
       <section className="resume__section" aria-labelledby="resume-education">
@@ -43,6 +42,25 @@ export default function Resume() {
             </div>
             <ul>
               {job.points.map((point, i) => (
+                <li key={i}>{point}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <section className="resume__section" aria-labelledby="resume-activities">
+        <h2 id="resume-activities">Leadership &amp; activities</h2>
+        {activities.map((item) => (
+          <div key={`${item.org}-${item.role}`} className="resume-entry">
+            <div className="resume-entry__head">
+              <h3>
+                {item.role}, {item.org}
+              </h3>
+              <span className="resume-entry__period">{item.period}</span>
+            </div>
+            <ul>
+              {item.points.map((point, i) => (
                 <li key={i}>{point}</li>
               ))}
             </ul>

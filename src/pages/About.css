@@ -3,9 +3,31 @@
   margin-bottom: var(--space-8);
 }
 
+/* overflow: hidden contains the floated portrait so later sections clear it */
+.about-lead {
+  overflow: hidden;
+}
+
+.about-lead__photo {
+  float: left;
+  width: 180px;
+  height: auto;
+  margin: var(--space-1) var(--space-8) var(--space-4) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
 .about-bio {
-  font-size: var(--text-lg);
-  line-height: 1.6;
+  font-size: var(--text-base);
+  line-height: 1.65;
+}
+
+@media (max-width: 480px) {
+  .about-lead__photo {
+    float: none;
+    width: 150px;
+    margin: 0 0 var(--space-6);
+  }
 }
 
 .about-block {

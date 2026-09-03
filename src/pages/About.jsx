@@ -6,11 +6,20 @@ export default function About() {
     <div className="container container--prose about">
       <h1>About</h1>
 
-      <section className="about-bio stack">
-        {about.paragraphs.map((text, i) => (
-          <p key={i}>{text}</p>
-        ))}
-      </section>
+      <div className="about-lead">
+        <img
+          className="about-lead__photo"
+          src={site.photo}
+          alt={`Portrait of ${site.name}`}
+          width="180"
+          height="225"
+        />
+        <section className="about-bio stack">
+          {about.paragraphs.map((text, i) => (
+            <p key={i}>{text}</p>
+          ))}
+        </section>
+      </div>
 
       <section className="about-block" aria-labelledby="education-heading">
         <h2 id="education-heading">Education</h2>
