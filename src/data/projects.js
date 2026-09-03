@@ -48,10 +48,10 @@ export const projects = [
     // notes: 'This and every other result are associations on observational data, not causal estimates. Volume, open interest, and stage are all products of traders\' own choices.',
     
     findings: [
-      'Prices tracked results, not performance. Goal margin strongly predicted total price movement (β = −0.185, p < 0.001); expected-goals margin did not (β = +0.003, p = 0.88), even though the two are correlated. A dominant xG performance that did not produce goals moved the price only marginally.',
-      'No behavioral bias at any timescale. Across four independent tests there was no systematic overreaction or underreaction — among first-half goals with a real price reaction, only 27.6% drifted back against the initial move, versus 50% under a no-reversion null (binomial p < 0.001).',
-      'Calibration sharpened toward settlement with no directional bias: Brier score fell from 0.166 three hours out to 0.026 five minutes before close, beating a base-rate benchmark (0.222) at every checkpoint.',
-      'Efficiency was not uniform. Tournament stage made no difference (Brier 0.128 vs. 0.131, p = 0.76), but matches in the highest trading-volume tercile were priced markedly worse than the lowest (Brier 0.151 vs. 0.103), at every one of the eight checkpoints. In a joint model, volume independently predicted worse calibration and open interest independently predicted better calibration (both p < 0.001); controlling for tournament stage strengthened the volume effect rather than explaining it away.',
+      'Prices tracked match results significantly more than performance. Goal margin strongly predicted total price movement (β = −0.185, p < 0.001); expected-goals margin did not (β = +0.003, p = 0.88), even though the two are correlated. A dominant xG performance that did not produce goals moved the price only marginally.',
+      'No behavioral bias at any timescale. Across four independent tests there was no systematic overreaction or underreaction; among first-half goals with a real price reaction, only 27.6% drifted back against the initial move, versus 50% under a no-reversion null (binomial p < 0.001).',
+      'Calibration improved toward settlement with no directional bias. The Brier score fell from 0.166 three hours out to 0.026 five minutes before close, beating a base-rate benchmark (0.222) at every checkpoint.',
+      'Interestingly, I found that efficiency was not uniform across matches. Tournament stage made no difference (Brier 0.128 vs. 0.131, p = 0.76), but matches with higher trading volume (proxy for overall attention) were priced markedly worse than the lower ones (Brier 0.151 vs. 0.103), at every one of the eight checkpoints. In a joint model, volume independently predicted worse calibration and open interest independently predicted better calibration (both p < 0.001); controlling for tournament stage only strengthened the volume effect instead of undermining it',
     ],
     figures: [
       {
@@ -70,12 +70,12 @@ export const projects = [
         src: '/images/projects/wc26-heterogeneity_analysis.png',
         alt: 'Three panels: Brier score by tournament half (overlapping), by trading-volume tercile (high volume clearly worse at every checkpoint), and the independent effects of log volume and log open interest on squared error.',
         caption:
-          'Where pricing is better or worse. Left: Brier score by tournament half (no significant difference). Middle: by match-level trading-volume tercile — high-volume matches are worse calibrated at every checkpoint. Right: independent effects of log volume and log open interest on squared error, controlling for checkpoint and each other.',
+          'Where pricing is better or worse. Left: Brier score by tournament half (no significant difference). Middle: by match-level trading-volume tercile. High-volume matches are worse calibrated at every checkpoint. Right: independent effects of log volume and log open interest on squared error, controlling for checkpoint and each other.',
       },
     ],
     significance: [
-      'The headline is counterintuitive and matters for anyone treating these markets as forecasts: the matches that draw the most money and attention — exactly the ones a forecast is most likely to be read from — were the least accurately priced, even though the market showed no conventional inefficiency and got sharper as each match ended.',
-      'The volume-versus-open-interest split points to a mechanism worth testing directly: rapid churn seems to add noise, while committed, standing capital is associated with better prices. The analysis is careful to frame this as an observational association, and notes the main limits — one tournament, 104 matches, and three non-independent contracts per match.',
+      'The headline finding is counterintuitive and matters for anyone treating these markets as real forecasts. The matches that drew the most money and attention, in other words the ones a forecast is most likely to be read from, were actually the least accurately priced, even though the market showed no conventional inefficiency and got sharper as each match ended.',
+      'The volume vs open-interest split also suggests that rapid trading churn seems to add noise, while committed, standing capital is associated with better prices. Of course this only an observational association, especially as the analysis is limited to one tournament, 104 matches, and three non-independent contracts per match.',
     ],
   },
 
