@@ -1,8 +1,8 @@
 /* =============================================================================
    Project case studies
    -----------------------------------------------------------------------------
-   Each object is one featured project. All content below is placeholder — swap
-   in your own writing, numbers, figures, and repository links.
+   Each object is one featured project. Fill in your own writing, numbers,
+   figures, and repository links.
 
    Field guide:
      slug          URL segment, e.g. /projects/<slug>  (keep it lowercase-dashed)
@@ -22,51 +22,58 @@
 
 export const projects = [
   {
-    slug: 'local-voter-turnout',
-    title: 'Predicting Turnout in Local Elections',
+    slug: 'world-cup-prediction-markets',
+    title: 'Efficiency and Attention in World Cup Prediction Markets',
     summary:
-      'Built a precinct-level model that identifies which registered voters are least likely to vote in municipal elections, to help a nonpartisan turnout campaign target outreach.',
-    year: '2025',
-    role: 'Solo project (course capstone)',
-    tools: ['Python', 'pandas', 'scikit-learn', 'GeoPandas'],
-    repo: 'https://github.com/kate-marine/local-voter-turnout',
+      'Analyzed minute-level Kalshi prices for all 104 matches of the 2026 World Cup against independent performance data, and found the market was unbiased and well calibrated overall but priced its highest-attention matches the least accurately.',
+    year: '2026',
+    role: 'Solo research project',
+    tools: ['Python', 'pandas', 'statsmodels', 'Selenium', 'matplotlib'],
+    repo: 'https://github.com/kate-marine/wc26-prediction-markets',
     question: [
-      'Municipal elections in the United States often see turnout below 20 percent, and the people who vote are systematically older, wealthier, and longer-tenured residents than the population as a whole. A local get-out-the-vote organization wanted to focus its limited volunteer hours on registered voters who were unlikely to vote on their own but could plausibly be moved by a knock or a call.',
-      'The analytical question was: using only information available before an election, how accurately can we rank registered voters by their probability of voting, and which factors drive that probability?',
+      'Prediction markets are increasingly treated as real-time forecasts, on the assumption that more trading and more money produce more accurate prices. The 2026 World Cup is a clean setting to test that: 104 matches, each with a definite outcome and detailed, independent performance data.',
+      'Using minute-level Kalshi prices for every match, I looked at three things. First, whether prices react to the final result of a match or to how well a team actually played — two signals that are correlated but often diverge. Second, whether the market shows behavioral biases, over- or under-reacting to new information. Third, and least studied, whether pricing accuracy is uniform across matches or varies with how much attention a match draws.',
     ],
     data: [
-      'The public voter file for a mid-sized New England county (roughly 240,000 registered voters), joined to precinct-level results from the past six years of municipal and general elections.',
-      'Features included individual vote history (which of the past elections each person voted in), age, years registered, party registration, method of voting in prior elections, and precinct-level context such as median household income and share of renters from the American Community Survey.',
-      'The outcome was whether each person voted in the most recent municipal election. Records with incomplete history were dropped, leaving about 210,000 rows. Because the voter file only records whether someone voted, not how, there is no vote-choice information involved.',
+      'Kalshi provides two market datasets: minute-level prices, volume, and open interest for the three-way match-outcome contracts (104 matches × 3 outcomes = 312 markets), and hourly tournament-winner futures for each team, used to track title odds across the tournament.',
+      'Performance data comes from FBref / Opta (shooting, cards, fouls, lineups) and SofaScore (expected goals, team-level statistics, and minute-stamped match events).',
+      'The sources share no common match identifier, so every join is mediated by a hand-built team-name crosswalk (Türkiye vs. Turkey, Cabo Verde vs. Cape Verde, and others), validated against a zero-unmatched-rows check. SofaScore\'s event timestamps use the nominal match clock rather than real elapsed time, so analyses that need minute-level alignment with the price candles are restricted to first-half events; the calibration work instead anchors everything to each contract\'s own settlement time.',
     ],
     methodology: [
-      'I framed the task as binary classification and compared three models: penalized logistic regression, a random forest, and gradient-boosted trees. Continuous features were standardized; categorical features were one-hot encoded.',
-      'Evaluation used 5-fold cross-validation, with folds drawn at the precinct level so that no precinct appeared in both training and validation. This mimics the real use case of scoring a new election and avoids leakage from geographically clustered behavior.',
-      'I selected the model on cross-validated ROC AUC and then checked calibration, since the campaign needed probabilities they could threshold, not just a ranking. Gradient boosting won narrowly and was well calibrated after isotonic adjustment.',
+      'Result vs. performance: for each match-outcome market I measured the total in-play price range, the price movement during the match, and the jump at settlement, then regressed all three jointly on standardized goal margin and standardized expected-goals margin so their effects could be compared while holding the other fixed.',
+      'Overreaction / underreaction: I split each price response to new information into an immediate jump and a later drift — drift against the jump is overreaction, drift in the same direction is underreaction — and applied this to individual first-half goals (sign test, n = 84), to match wins in the title-odds futures (n = 208 team-matches), and to a direct test of whether a team\'s performance-versus-result gap predicts later title-odds drift.',
+      'Calibration: across all 312 finalized match markets I sampled the last traded price at eight checkpoints from 180 down to 5 minutes before each market\'s close, paired it with the outcome, and computed Brier scores and reliability diagrams with 95% Wilson intervals.',
+      'Efficiency across matches: a joint OLS of squared pricing error on standardized log volume and standardized log open interest, with checkpoint fixed effects and tournament-stage controls. The paper is explicit that this and every other result are associations on observational data, not causal estimates — volume, open interest, and stage are all products of traders\' own choices.',
     ],
     findings: [
-      'The final model reached a cross-validated ROC AUC of 0.86 and identified a decile of "low-propensity but reachable" voters where predicted turnout was 12 percent against an overall rate of 31 percent.',
-      'Prior vote history dominated: whether someone voted in the last comparable municipal election was worth more than all demographic features combined.',
-      'After controlling for vote history, precinct share of renters and years-since-registration were the strongest remaining predictors, consistent with residential stability driving local participation.',
-      'Targeting the model\'s bottom three deciles would let the campaign reach about 70 percent of eventual non-voters while contacting only 30 percent of the file.',
+      'Prices tracked results, not performance. Goal margin strongly predicted total price movement (β = −0.185, p < 0.001); expected-goals margin did not (β = +0.003, p = 0.88), even though the two are correlated. A dominant xG performance that did not produce goals moved the price only marginally.',
+      'No behavioral bias at any timescale. Across four independent tests there was no systematic overreaction or underreaction — among first-half goals with a real price reaction, only 27.6% drifted back against the initial move, versus 50% under a no-reversion null (binomial p < 0.001).',
+      'Calibration sharpened toward settlement with no directional bias: Brier score fell from 0.166 three hours out to 0.026 five minutes before close, beating a base-rate benchmark (0.222) at every checkpoint.',
+      'Efficiency was not uniform. Tournament stage made no difference (Brier 0.128 vs. 0.131, p = 0.76), but matches in the highest trading-volume tercile were priced markedly worse than the lowest (Brier 0.151 vs. 0.103), at every one of the eight checkpoints. In a joint model, volume independently predicted worse calibration and open interest independently predicted better calibration (both p < 0.001); controlling for tournament stage strengthened the volume effect rather than explaining it away.',
     ],
     figures: [
       {
-        src: '/images/projects/turnout-feature-importance.svg',
-        alt: 'Horizontal bar chart of permutation feature importances, with prior municipal vote history far ahead of other features.',
+        src: '/images/projects/wc26-calibration.png',
+        alt: 'Two panels: Brier score falling sharply as markets approach close and staying below the base-rate line, and reliability diagrams tracking the 45-degree line at four pre-close checkpoints.',
         caption:
-          'Permutation importance for the final model. Prior vote history is the dominant signal; demographic and precinct features add smaller, incremental predictive value.',
+          'Match-market calibration across all 312 contracts. Left: Brier score (lower is better) by minutes before the market closes, against the base-rate benchmark. Right: reliability diagrams at four checkpoints — quoted price versus the observed frequency of the outcome, with 95% Wilson intervals.',
       },
       {
-        src: '/images/projects/turnout-calibration.svg',
-        alt: 'Calibration curve showing predicted probability against observed turnout, close to the diagonal after isotonic calibration.',
+        src: '/images/projects/wc26-regression_coefficients.png',
+        alt: 'Coefficient plot with three panels (price range, in-match movement, settlement jump); goal-margin coefficients sit well left of zero while expected-goals, possession, and shot margins overlap zero.',
         caption:
-          'Calibration on held-out precincts after isotonic adjustment. Predicted probabilities can be read directly as expected turnout rates.',
+          'Standardized regression coefficients (95% CI) for goal margin and expected-goals margin on three components of price movement. Intervals crossing zero (red) are unreliable predictors once the other variable is held fixed. Goal margin dominates the total range and the settlement jump; xG margin has only a weak independent link to movement during play.',
+      },
+      {
+        src: '/images/projects/wc26-heterogeneity_analysis.png',
+        alt: 'Three panels: Brier score by tournament half (overlapping), by trading-volume tercile (high volume clearly worse at every checkpoint), and the independent effects of log volume and log open interest on squared error.',
+        caption:
+          'Where pricing is better or worse. Left: Brier score by tournament half (no significant difference). Middle: by match-level trading-volume tercile — high-volume matches are worse calibrated at every checkpoint. Right: independent effects of log volume and log open interest on squared error, controlling for checkpoint and each other.',
       },
     ],
     significance: [
-      'The campaign used the bottom-decile list to allocate roughly 400 volunteer shifts for a spring election, concentrating on voters the model flagged as reachable rather than on the high-propensity voters who typically get contacted.',
-      'More broadly, the project is a concrete example of a pattern that recurs in analytics work: a simple, well-validated model plus a clear targeting rule is more useful to a decision-maker than a marginal gain in raw accuracy.',
+      'The headline is counterintuitive and matters for anyone treating these markets as forecasts: the matches that draw the most money and attention — exactly the ones a forecast is most likely to be read from — were the least accurately priced, even though the market showed no conventional inefficiency and got sharper as each match ended.',
+      'The volume-versus-open-interest split points to a mechanism worth testing directly: rapid churn seems to add noise, while committed, standing capital is associated with better prices. The analysis is careful to frame this as an observational association, and notes the main limits — one tournament, 104 matches, and three non-independent contracts per match.',
     ],
   },
 

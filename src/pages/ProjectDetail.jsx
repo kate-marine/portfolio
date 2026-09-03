@@ -60,11 +60,11 @@ export default function ProjectDetail() {
         </dl>
       </header>
 
-      <CaseSection id="question" title="The question">
+      <CaseSection id="question" title="Main Questions">
         <Paragraphs items={project.question} />
       </CaseSection>
 
-      <CaseSection id="data" title="The data">
+      <CaseSection id="data" title="Data">
         <Paragraphs items={project.data} />
       </CaseSection>
 
@@ -90,7 +90,7 @@ export default function ProjectDetail() {
         </CaseSection>
       )}
 
-      <CaseSection id="significance" title="Why it matters">
+      <CaseSection id="significance" title="Significance">
         <Paragraphs items={project.significance} />
       </CaseSection>
 
