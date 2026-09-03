@@ -12,6 +12,7 @@
      role          "Solo project", "Team of 3", "Research assistant", ...
      tools         Short list, rendered as plain text (not badges)
      repo          Link to the separate GitHub repository
+     paper         (optional) path to a PDF write-up in /public, e.g. '/paper.pdf'
      question      string[]  — the problem / research question (paragraphs)
      data          string[]  — datasets, size, source, caveats
      methodology   string[]  — approach, models, validation
@@ -30,6 +31,8 @@ export const projects = [
     role: 'Solo research project',
     tools: ['Python', 'pandas', 'statsmodels', 'Selenium', 'matplotlib'],
     repo: 'https://github.com/kate-marine/wc26-prediction-markets',
+    // Optional: a PDF of the full write-up, served from /public.
+    paper: '/wc_prediction_markets_paper.pdf',
     question: [
       'Prediction markets are increasingly treated as real-time forecasts, on the assumption that more trading and more money produce more accurate prices. World Cup matches are well suited to studying this question because each event has a clear outcome and can be compared against detailed, independent performance data.',
       'Using minute-level Kalshi prices for every match, I looked at three things. First, whether prices react to the final result of a match or to how well a team actually played. Second, whether the market shows behavioral biases, specifially over or underreacting to new information. Third, and least studied, whether pricing accuracy is uniform across matches or varies with how much public attention a match gets.',

@@ -3,7 +3,7 @@ import { site } from '../data/site.js'
 import './Header.css'
 
 const navItems = [
-  { to: '/', label: 'Work', end: true },
+  { to: '/', label: 'Projects', end: true },
   { to: '/about', label: 'About' },
   { to: '/resume', label: 'Resume' },
 ]

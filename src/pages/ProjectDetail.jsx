@@ -32,7 +32,7 @@ export default function ProjectDetail() {
   return (
     <article className="container container--prose case">
       <Link to="/" className="case__back">
-        <span aria-hidden="true">← </span>All work
+        <span aria-hidden="true">← </span>All projects
       </Link>
 
       <header className="case__header">
@@ -57,6 +57,16 @@ export default function ProjectDetail() {
               </a>
             </dd>
           </div>
+          {project.paper && (
+            <div>
+              <dt>Paper</dt>
+              <dd>
+                <a href={project.paper} target="_blank" rel="noreferrer">
+                  Full write-up (PDF)
+                </a>
+              </dd>
+            </div>
+          )}
         </dl>
       </header>
 
@@ -96,18 +106,32 @@ export default function ProjectDetail() {
 
       <footer className="case__cta">
         <p>
-          Full code, data-processing notebooks, and a longer technical writeup are
-          in the project repository.
+          {project.paper
+            ? 'The full write-up is available as a PDF, and all code and data-processing notebooks are in the project repository.'
+            : 'Full code, data-processing notebooks, and a longer technical writeup are in the project repository.'}
         </p>
-        <a
-          className="case__cta-link"
-          href={project.repo}
-          target="_blank"
-          rel="noreferrer"
-        >
-          View repository on GitHub
-          <span aria-hidden="true"> →</span>
-        </a>
+        <div className="case__cta-links">
+          {project.paper && (
+            <a
+              className="case__cta-link"
+              href={project.paper}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read the full paper (PDF)
+              <span aria-hidden="true"> →</span>
+            </a>
+          )}
+          <a
+            className="case__cta-link"
+            href={project.repo}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View repository on GitHub
+            <span aria-hidden="true"> →</span>
+          </a>
+        </div>
       </footer>
     </article>
   )
