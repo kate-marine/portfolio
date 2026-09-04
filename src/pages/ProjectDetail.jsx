@@ -31,7 +31,7 @@ export default function ProjectDetail() {
 
   return (
     <article className="container container--prose case">
-      <Link to="/" className="case__back">
+      <Link to="/projects" className="case__back">
         <span aria-hidden="true">← </span>All projects
       </Link>
 

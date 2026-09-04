@@ -18,8 +18,18 @@
   line-height: 1.6;
 }
 
+/* --- Sections ------------------------------------------------------------- */
 .home-section {
   margin-top: var(--space-24);
+}
+
+/* Closer spacing for the sub-sections that belong to "About" */
+.home-section--tight {
+  margin-top: var(--space-12);
+}
+
+.home-section--prose {
+  max-width: var(--width-prose);
 }
 
 .home-section__head {
@@ -27,39 +37,116 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-4);
-  padding-bottom: var(--space-2);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .home-section__note {
   font-size: var(--text-sm);
 }
 
-/* The first card has its own top border; the section head already provides
-   separation, so pull the list up slightly. */
-.home-projects {
-  margin-top: var(--space-2);
+/* --- About -------------------------------------------------------------- */
+.home-about {
+  overflow: hidden; /* contains the floated portrait */
 }
 
-.home-focus {
+.home-about__photo {
+  float: left;
+  width: 180px;
+  height: auto;
+  margin: var(--space-1) var(--space-8) var(--space-4) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.home-about__bio {
+  line-height: 1.65;
+}
+
+@media (max-width: 480px) {
+  .home-about__photo {
+    float: none;
+    width: 150px;
+    margin: 0 0 var(--space-6);
+  }
+}
+
+/* --- Focus areas ------------------------------------------------------- */
+.home-plain-list {
   list-style: none;
   padding: 0;
-  margin-top: var(--space-4);
-  max-width: var(--width-prose);
+  margin: 0;
 }
-
-.home-focus li {
+.home-plain-list li {
   padding: var(--space-3) 0;
   border-top: 1px solid var(--color-border);
 }
-
-.home-contact {
-  max-width: var(--width-prose);
+.home-plain-list li:first-child {
+  border-top: none;
+  padding-top: 0;
 }
 
-.home-contact h2 {
+/* --- Education ------------------------------------------------------------ */
+.home-edu {
   margin-bottom: var(--space-4);
 }
+.home-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.home-detail-list li {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
 
+/* --- Skills ------------------------------------------------------------- */
+.home-skills {
+  margin: 0;
+}
+.home-skills > div {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border);
+}
+.home-skills > div:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.home-skills dt {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.home-skills dd {
+  margin: 0;
+}
+@media (max-width: 560px) {
+  .home-skills > div {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+/* --- Selected work --------------------------------------------------------- */
+.home-projects .project-card:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.home-more {
+  margin-top: var(--space-8);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* --- Contact ---------------------------------------------------------------- */
 .home-contact p + p {
   margin-top: var(--space-3);
 }

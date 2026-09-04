@@ -1,0 +1,15 @@
+.projects-intro {
+  max-width: var(--width-prose);
+  margin-bottom: var(--space-8);
+}
+
+.projects-intro h1 {
+  font-size: var(--text-2xl);
+}
+
+.projects-intro__lead {
+  margin-top: var(--space-4);
+  font-size: var(--text-base);
+}
+
+/* The first ProjectCard's top border acts as the rule under the intro. */
