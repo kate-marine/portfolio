@@ -2,13 +2,10 @@ import { NavLink, Link } from 'react-router-dom'
 import { site } from '../data/site.js'
 import './Header.css'
 
-const navItems = [
-  { to: '/', label: 'Projects', end: true },
-  { to: '/about', label: 'About' },
-  { to: '/resume', label: 'Resume' },
-]
-
 export default function Header() {
+  const linkClass = ({ isActive }) =>
+    isActive ? 'site-header__link site-header__link--active' : 'site-header__link'
+
   return (
     <header className="site-header">
       <div className="container site-header__inner">
@@ -17,21 +14,22 @@ export default function Header() {
         </Link>
         <nav aria-label="Primary">
           <ul className="site-header__nav">
-            {navItems.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  end={item.end}
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'site-header__link site-header__link--active'
-                      : 'site-header__link'
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
+            <li>
+              <NavLink to="/projects" className={linkClass}>
+                Projects
+              </NavLink>
+            </li>
+            <li>
+              {/* Jumps to the About section of the home page */}
+              <Link to="/#about" className="site-header__link">
+                About
+              </Link>
+            </li>
+            <li>
+              <NavLink to="/resume" className={linkClass}>
+                Resume
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>
