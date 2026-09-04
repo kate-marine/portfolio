@@ -92,13 +92,13 @@ export const projects = [
     tools: ['Python', 'pandas', 'scikit-learn', 'SHAP', 'matplotlib'],
     repo: 'https://github.com/kate-marine/wearable-dynamics-data-model',
     question: [
-      'A wearable tracker captures more than a person\'s average activity level — it captures how that activity moves day to day, trends over a year, and correlates with itself over time. I asked whether that temporal structure predicts memory-task performance beyond what a simple average already explains.',
-      'Using a public dataset of Fitbit logs and memory-task scores for 113 participants, I built a baseline model on mean activity alone and an augmented model that adds temporal features, then tested whether the temporal features earned their keep out of sample.',
+      'A wearable tracker captures more than a person\'s average activity level. It captures how the activity varies day to day, trends over a year, and correlates with itself over time. I asked whether this temporal structure predicts memory-task performance beyond what a simple average already explains.',
+      'Using a dataset from a previous Dartmouth studyof Fitbit logs and memory-task scores for 113 participants, I built a baseline model on mean activity alone and an augmented model that adds temporal features, then tested whether the temporal features add value out of sample.',
     ],
     data: [
-      'The public dataset behind Manning et al. (2022, Scientific Reports): raw Fitbit logs for 113 participants in long format (datetime, variable, value), roughly a year per person — 803,767 rows across 130 variables in total.',
-      'Paired with memory outcomes (8 summary scores plus 54 fine-grained task metrics — free recall, foreign-language flashcards, primacy/recency, semantic clustering, error-distance measures) and survey responses covering demographics, stress, and exercise habits.',
-      'I rebuilt the panel from the raw long-format logs rather than starting from a pre-collapsed summary, reindexing each participant over their full daily date range so missing days show up as real gaps rather than being silently dropped — temporal features need an honest time axis to measure trend and autocorrelation against.',
+      'The public dataset from Manning et al. (2022, Scientific Reports): raw Fitbit logs for 113 participants in long format (datetime, variable, value), roughly a year per person — 803,767 rows across 130 variables in total.',
+      'Paired with memory outcomes (8 summary scores plus 54 fine-grained task metrics including free recall, foreign-language flashcards, primacy/recency, semantic clustering, error-distance measures) and survey responses covering demographics, stress, and exercise habits.',
+      'I rebuilt the panel from the raw long-format logs rather than starting from a pre-collapsed summary, reindexing each participant over their full daily date range so missing days showed up as actual gaps instead of being dropped, since temporal features needed an accurate time axis to measure trend and autocorrelation against.',
     ],
     methodology: [
       'Signal selection: of 130 raw variables, kept only daily wearable signals passing a coverage gate (≥300 median valid days across participants, present for ≥60 participants), leaving 14 signals — steps, floors, active minutes, calories, body composition, and similar.',
