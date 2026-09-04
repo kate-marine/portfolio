@@ -18,7 +18,7 @@ export const site = {
   location: 'Hanover, New Hampshire',
   email: 'katherine.a.marine.28@dartmouth.edu',
 
-  // Portrait shown on the About page. Swap the file at public/images/headshot.jpg.
+  // Portrait shown in the About section of the home page.
   photo: '/images/headshot.jpg',
 
   links: {

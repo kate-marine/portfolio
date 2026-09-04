@@ -83,45 +83,59 @@ export const projects = [
   },
 
   {
-    slug: 'financial-aid-outreach',
-    title: 'Did a Financial-Aid Outreach Campaign Work?',
+    slug: 'fitbit-activity-memory',
+    title: 'Fitbit Activity Dynamics and Memory Performance',
     summary:
-      'Evaluated whether a text-message campaign encouraging students to complete financial-aid renewal actually increased completion, using a difference-in-differences design.',
-    year: '2024',
-    role: 'Research assistant, team of 2',
-    tools: ['R', 'tidyverse', 'fixest', 'ggplot2'],
-    repo: 'https://github.com/kate-marine/financial-aid-outreach',
+      'Tested whether the day-to-day pattern of a person\'s Fitbit activity predicts memory-task performance beyond their average activity level — and returned a rigorously validated null result rather than a modeling failure.',
+    year: '2026',
+    role: 'Solo research project',
+    tools: ['Python', 'pandas', 'scikit-learn', 'SHAP', 'matplotlib'],
+    repo: 'https://github.com/kate-marine/wearable-dynamics-data-model',
     question: [
-      'Every year a share of returning college students fail to re-file the FAFSA on time and lose aid they are eligible for. A university system piloted a series of reminder texts to students at some campuses and wanted to know whether it moved on-time renewal, and by how much.',
-      'The campaign was not randomly assigned, so the question was really two questions: did renewal rise at treated campuses relative to untreated ones, and is a causal reading of that difference credible?',
+      'A wearable tracker captures more than a person\'s average activity level — it captures how that activity moves day to day, trends over a year, and correlates with itself over time. I asked whether that temporal structure predicts memory-task performance beyond what a simple average already explains.',
+      'Using a public dataset of Fitbit logs and memory-task scores for 113 participants, I built a baseline model on mean activity alone and an augmented model that adds temporal features, then tested whether the temporal features earned their keep out of sample.',
     ],
     data: [
-      'De-identified administrative records for about 31,000 aid-eligible returning students across nine campuses over four academic years, with the reminder campaign rolled out at four campuses in the final year.',
-      'Each record included the campus, the academic year, whether the student renewed aid on time, and background variables: prior-year aid amount, class standing, first-generation status, and prior-year GPA band.',
-      'Two campuses had incomplete renewal-date data in the first year and were excluded from the main specification, then added back as a robustness check.',
+      'The public dataset behind Manning et al. (2022, Scientific Reports): raw Fitbit logs for 113 participants in long format (datetime, variable, value), roughly a year per person — 803,767 rows across 130 variables in total.',
+      'Paired with memory outcomes (8 summary scores plus 54 fine-grained task metrics — free recall, foreign-language flashcards, primacy/recency, semantic clustering, error-distance measures) and survey responses covering demographics, stress, and exercise habits.',
+      'I rebuilt the panel from the raw long-format logs rather than starting from a pre-collapsed summary, reindexing each participant over their full daily date range so missing days show up as real gaps rather than being silently dropped — temporal features need an honest time axis to measure trend and autocorrelation against.',
     ],
     methodology: [
-      'The core design is difference-in-differences: compare the change in on-time renewal at treated campuses before and after the campaign to the same change at untreated campuses over the same period.',
-      'I estimated a two-way fixed-effects linear probability model with campus and year fixed effects, clustering standard errors by campus, and re-ran it as a logit for a robustness check.',
-      'The identifying assumption is parallel trends. I tested it by plotting campus-level renewal rates for the three pre-campaign years and by running an event-study specification with leads and lags; pre-period coefficients were small and statistically indistinguishable from zero.',
+      'Signal selection: of 130 raw variables, kept only daily wearable signals passing a coverage gate (≥300 median valid days across participants, present for ≥60 participants), leaving 14 signals — steps, floors, active minutes, calories, body composition, and similar.',
+      'Feature engineering: a 113×14 means-only matrix (one mean per participant per signal) as the baseline, and a 110×149 augmented matrix adding per-series descriptors — spread, OLS trend and its R², autocorrelation at 1 and 7 days, coefficient of variation, and data coverage — concatenated into a 113×163 matrix. With 163 predictors and 113 participants, this is a p > n problem by construction.',
+      'Modeling: every model runs through the same median-impute → standardize → regress pipeline, fit inside each training fold only, evaluated with shuffled 5-fold cross-validation. Ridge (α = 1.0) on the means-only baseline versus Ridge (α = 100.0, heavier shrinkage for the higher dimensionality) on the augmented features, compared by R² lift (augmented − baseline).',
+      'Robustness battery: the same comparison repeated on 40 fine-grained outcomes instead of 4 summary scores, on three additional model classes (Elastic Net, Random Forest on means, Random Forest on augmented features), and as a univariate Spearman screen across all 560 feature–outcome pairs.',
+      'Validation of the null itself: a synthetic-signal test pushes a target with a known injected effect through the identical pipeline to confirm it can recover a real signal, and a power analysis (Fisher\'s z-transformation) quantifies the smallest correlation the sample could reliably detect.',
     ],
     findings: [
-      'On-time renewal at treated campuses rose 4.6 percentage points relative to untreated campuses (95% CI: 2.1 to 7.1), against a pre-campaign baseline of about 78 percent.',
-      'The effect was roughly twice as large for first-generation students and for students in the lowest prior-aid quartile.',
-      'The event-study showed no differential pre-trend and a sharp jump in the treatment year, supporting a causal reading.',
-      'A back-of-envelope cost comparison put the campaign at under $10 per additional on-time renewal, small next to the average aid package preserved.',
+      'Every comparison pointed the same way: R² lift was negative for 34 of 40 outcomes, and the baseline itself barely predicted memory scores (cross-validated R² from −0.22 to −1.28 on the four summary outcomes) — adding temporal dynamics made out-of-sample prediction worse, not better.',
+      'The pattern held across every robustness check: switching to Elastic Net or Random Forest, expanding to 40 fine-grained outcomes, and a 560-pair univariate Spearman screen where the strongest correlate (r ≈ 0.55) didn\'t cohere with any related outcome — consistent with multiple-comparison noise rather than a real effect.',
+      'The synthetic-signal test recovered R² ≈ 0.95 on a target with a known injected effect, confirming the null on real data isn\'t a broken pipeline.',
+      'A power analysis showed the study could only reliably detect |r| ≳ 0.26 at n = 113; the actual fold-wise correlations (|r| ≈ 0.07–0.19) fall below that floor, so the honest conclusion is "no reliable evidence of an effect at this sample size," not "no effect exists."',
     ],
     figures: [
       {
-        src: '/images/projects/aid-did.svg',
-        alt: 'Line chart of on-time renewal rates for treated and untreated campuses across four years, diverging only in the final year.',
+        src: '/images/projects/fitbit-r2-comparison.png',
+        alt: 'Line chart comparing cross-validated R² for the baseline and augmented models across four memory outcomes; the augmented model sits at or far below the baseline on every outcome.',
         caption:
-          'On-time renewal by campus group. Trends track closely in the three pre-campaign years and separate sharply in the treatment year (dashed line).',
+          'Cross-validated R² for the mean-activity baseline versus the temporal-augmented model, across the four summary memory outcomes. The augmented model never beats the baseline, and is dramatically worse on two of the four.',
+      },
+      {
+        src: '/images/projects/fitbit-r2-lift-histogram.png',
+        alt: 'Histogram of R² lift across 40 fine-grained outcomes, almost entirely at or below zero with a long left tail extending past -7000.',
+        caption:
+          'Distribution of R² lift (augmented minus baseline) across all 40 fine-grained outcomes. Nearly every outcome clusters at or below zero, with a long negative tail.',
+      },
+      {
+        src: '/images/projects/fitbit-top-correlations.png',
+        alt: 'Horizontal bar chart of the five strongest feature-target Spearman correlations, led by mean floors, mean weight, mean calories, mean BMR calories, and mean steps.',
+        caption:
+          'The strongest single feature–outcome Spearman correlations are all mean-activity features, not any of the 149 temporal descriptors — even the univariate screen turns up nothing dynamic.',
       },
     ],
     significance: [
-      'The result gave the university system a defensible estimate to justify scaling the campaign to all campuses, with a specific recommendation to prioritize first-generation and low-aid students where the effect concentrated.',
-      'The project also documents the diagnostic work that separates a real causal claim from a suggestive correlation — the parallel-trends checks were as important to the client as the headline number.',
+      'This is a calibrated null, not an absence of effort: the same negative finding survived a synthetic-signal sanity check, four model classes, 40 outcomes instead of 4, and a 560-pair correlation screen — and the writeup is explicit that a small, underpowered sample (n = 113) can\'t distinguish "no effect" from "an effect too small to detect here."',
+      'Methodologically it\'s the project I\'d point to for rigor over a positive headline: leakage-safe cross-validation, a p > n feature set handled with real caution about overfitting, and a power analysis that turns "we found nothing" into a specific, falsifiable claim about what the data could and couldn\'t have shown.',
     ],
   },
 
