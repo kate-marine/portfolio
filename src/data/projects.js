@@ -86,7 +86,7 @@ export const projects = [
     slug: 'fitbit-activity-memory',
     title: 'Fitbit Activity Dynamics and Memory Performance',
     summary:
-      'Tested whether the day-to-day pattern of a person\'s Fitbit activity predicts memory-task performance beyond their average activity level — and returned a rigorously validated null result rather than a modeling failure.',
+      'Tested whether the day-to-day pattern of a person\'s Fitbit activity predicts memory-task performance beyond their average activity level as studied in Manning et al. (2022, Scientific Reports).',
     year: '2026',
     role: 'Solo research project',
     tools: ['Python', 'pandas', 'scikit-learn', 'SHAP', 'matplotlib'],
